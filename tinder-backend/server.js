@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Cors from "cors";
 import cards from "./dbCards.js";
+import chats from "./chats.js";
 
 // App Config
 const app = express();
@@ -27,7 +28,6 @@ mongoose.connect(connection_url, (err) => {
 // API Endpoints
 app.get("/", (req, res) => res.status(200).send("HELLO THERE!!!!"));
 
-
 app.post("/cards", (req, res) => {
   const dbCard = req.body;
   console.log(dbCard);
@@ -43,6 +43,29 @@ app.post("/cards", (req, res) => {
 
 app.get("/cards", (req, res) => {
   cards.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.post("/chats", (req, res) => {
+  const convos = req.body;
+  console.log(convos);
+
+  chats.create(convos, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.get("/chats", (req, res) => {
+  chats.find((err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
