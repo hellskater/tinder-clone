@@ -8,7 +8,7 @@ import chats from "./chats.js";
 const app = express();
 const port = process.env.PORT || 8001;
 const connection_url =
-  "mongodb+srv://admin:PtESWtfpWMmq07s5@cluster0.w319e.mongodb.net/tinderdb?retryWrites=true&w=majority";
+  "mongodb+srv://admin:<password>@cluster0.w319e.mongodb.net/tinderdb?retryWrites=true&w=majority";
 
 // Middlewares
 app.use(express.json());
